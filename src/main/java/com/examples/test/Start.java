@@ -30,16 +30,14 @@ public class Start extends VerticalLayout {
 
     private TextField filterText = new TextField();
 
-
     public Start() {
-        filterText.setPlaceholder("Filter by titolo...");
+        filterText.setPlaceholder("Filter by title...");
         filterText.setClearButtonVisible(true);
+
         filterText.setValueChangeMode(ValueChangeMode.EAGER);
         filterText.addValueChangeListener(e -> updateList());
 
-        grid.setColumns("titolo", "desc", "reportedBy");
-
-        setSizeFull();
+        grid.setColumns("id", "titolo", "desc", "reportedBy");
 
         updateList();
 
@@ -47,7 +45,7 @@ public class Start extends VerticalLayout {
     }
 
     public void updateList() {
-        grid.setItems(service.getAll());
+        grid.setItems(service.getAllByTitle(filterText.getValue()));
     }
         /*
         HorizontalLayout h = new HorizontalLayout();

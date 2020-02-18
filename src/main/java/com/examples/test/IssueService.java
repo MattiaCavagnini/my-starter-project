@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,15 +47,36 @@ public class IssueService {
     public Issue getByTitle(String title){
         ResponseEntity<Issue[]> response =
                 restTemplate.getForEntity(
-                        "http://localhost:8080/issues/",
+                        "http://localhost:8080/issues?title=" + title,
                         Issue[].class);
         Issue[] issues = response.getBody();
+        if(title!= null){
         for(int i = 0; i<issues.length;i++){
             if(title.equals(issues[i].getTitolo())){
                 return issues[i];
-            }
+            }}
         }
         return null;
+    }
+
+    public Issue[] getAllByTitle(String title){
+        List<Issue> issue = new ArrayList<>();
+        ResponseEntity<Issue[]> response =
+                restTemplate.getForEntity(
+                        "http://localhost:8080/issues?title=" + title,
+                        Issue[].class);
+        issue = Arrays.asList(response.getBody());
+        if(title.equals(null)) {
+            return Issue;
+        }
+        else{
+            for(int i = 0; i<issue.size(); i++){
+                if(!issue.get(i).getTitolo().equals(title)){
+                    issue.remove(i);
+                }
+            }
+            return issue;
+        }
     }
 
     public boolean postIssue(String titolo, String desc, String repo) {
@@ -93,11 +115,4 @@ public class IssueService {
         return true;
     }
 
-    public Issue[] getAllByTitolo(String title){
-        ResponseEntity<Issue[]> response =
-                restTemplate.getForEntity(
-                        "http://localhost:8080/issues/title?title=", Issue[].class);
-        Issue[] issues = response.getBody();
-        return issues;
-    }
 }

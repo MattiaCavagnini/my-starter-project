@@ -2,6 +2,7 @@ package com.examples.test.components;
 
 import com.examples.test.model.Issue;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -10,6 +11,7 @@ import com.vaadin.flow.data.binder.Binder;
 
 public class IssuesComponent extends FormLayout {
 
+    private TextField id = new TextField("id");
     private TextField titolo = new TextField("Titolo");
     private TextField reportedBy = new TextField("Reported By");
     private TextArea desc = new TextArea();
@@ -20,13 +22,15 @@ public class IssuesComponent extends FormLayout {
     private Binder<Issue> binder = new Binder<>(Issue.class);
 
     public IssuesComponent() {
+
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        add(titolo, desc, reportedBy, buttons);
 
         binder.bindInstanceFields(this);
-        add(titolo, desc, reportedBy, buttons);
     }
 
-    public void setCustomer(Issue issue) {
+    public void setComponent(Issue issue) {
         binder.setBean(issue);
 
         if(issue == null) {
@@ -36,7 +40,4 @@ public class IssuesComponent extends FormLayout {
             titolo.focus();
         }
     }
-
-
-
 }
