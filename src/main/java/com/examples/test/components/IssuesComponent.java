@@ -31,6 +31,7 @@ public class IssuesComponent extends FormLayout {//CustomerForm
 
         titolo.setWidth("400px");
         desc.setWidth("400px");
+        desc.setHeight("200px");
         reportedBy.setWidth("400px");
 
         setVisible(false);
@@ -57,7 +58,7 @@ public class IssuesComponent extends FormLayout {//CustomerForm
         Issue customer = binder.getBean();
         service.deleteById(customer.getId());
         mainView.updateList();
-        setComponent(null);
+        
     }
 
     public void setComponent(Issue issue) {

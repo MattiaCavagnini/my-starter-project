@@ -52,7 +52,7 @@ public class MainView extends VerticalLayout {//MainView
     }
 
     public void updateList() {
-        grid.setItems(service.getAll(filterText.getValue()));
+        grid.setItems(service.getAllByTitle(filterText.getValue()));
     }
 }
         /*
