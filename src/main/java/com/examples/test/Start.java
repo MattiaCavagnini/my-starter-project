@@ -32,11 +32,24 @@ public class Start extends VerticalLayout {//MainView
     private TextField filterText = new TextField();
     private IssuesComponent form = new IssuesComponent(this);
 
+
+
     public Start() {
         filterText.setPlaceholder("Filter by title...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.EAGER);
         filterText.addValueChangeListener(e -> updateList());
+
+        Button addCustomerBtn = new Button("Add new issue");
+        addCustomerBtn.addClickListener(e -> {
+            grid.asSingleSelect().clear();
+            form.setComponent(new Issue());
+        });
+
+        form.setComponent(null);
+
+        HorizontalLayout toolbar = new HorizontalLayout(filterText,
+                addCustomerBtn);
 
         grid.setColumns("titolo", "desc", "reportedBy");
 
@@ -44,10 +57,13 @@ public class Start extends VerticalLayout {//MainView
         mainContent.setSizeFull();
         grid.setSizeFull();
 
-        add(filterText, mainContent);
+        add(new HorizontalLayout(filterText, toolbar), mainContent);
         setSizeFull();
 
         updateList();
+
+        grid.asSingleSelect().addValueChangeListener(event ->
+                form.setComponent(grid.asSingleSelect().getValue()));
     }
 
     public void updateList() {
