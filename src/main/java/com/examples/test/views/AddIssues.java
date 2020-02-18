@@ -1,12 +1,14 @@
 package com.examples.test.views;
 
 import com.examples.test.IssueService;
+import com.examples.test.model.Issue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -26,6 +28,10 @@ import static org.junit.Assert.assertThat;
 @PWA(name = "My App", shortName = "My App")
 public class AddIssues extends VerticalLayout {
 
+
+
+
+    /*
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public AddIssues() {
@@ -111,5 +117,5 @@ public class AddIssues extends VerticalLayout {
                              returnButton)
                   ))
         );
-    }
+    }*/
 }

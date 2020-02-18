@@ -5,6 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 public class IssueService {
     RestTemplate restTemplate;
@@ -88,5 +91,13 @@ public class IssueService {
         Issue newIssue = new Issue(id,title,desc,repo);
         restTemplate.put( "http://localhost:8080/issues", newIssue);
         return true;
+    }
+
+    public Issue[] getAllByTitolo(String title){
+        ResponseEntity<Issue[]> response =
+                restTemplate.getForEntity(
+                        "http://localhost:8080/issues/title?title=", Issue[].class);
+        Issue[] issues = response.getBody();
+        return issues;
     }
 }

@@ -1,5 +1,6 @@
-package com.examples.test;
+package com.examples.test.views;
 
+import com.examples.test.IssueService;
 import com.examples.test.controllo.ControlloPresenza;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;

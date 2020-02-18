@@ -1,6 +1,8 @@
 package com.examples.test;
 
+import com.examples.test.components.IssuesComponent;
 import com.examples.test.model.Issue;
+import com.examples.test.views.AddIssues;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -14,17 +16,43 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.client.RestTemplate;
 
 @Route("menu")
 @Slf4j
-public class Start extends Div {
+public class Start extends VerticalLayout {
+    private IssueService service = new IssueService();
+    private Grid<Issue> grid = new Grid<>(Issue.class);
+
+    private TextField filterText = new TextField();
+
+
     public Start() {
+        filterText.setPlaceholder("Filter by titolo...");
+        filterText.setClearButtonVisible(true);
+        filterText.setValueChangeMode(ValueChangeMode.EAGER);
+        filterText.addValueChangeListener(e -> updateList());
+
+        grid.setColumns("titolo", "desc", "reportedBy");
+
+        setSizeFull();
+
+        updateList();
+
+        add(filterText, grid);
+    }
+
+    public void updateList() {
+        grid.setItems(service.getAll());
+    }
+        /*
         HorizontalLayout h = new HorizontalLayout();
         /***********************************************************************************************/
-        RestTemplate restTemplate = new RestTemplate();
+        /*RestTemplate restTemplate = new RestTemplate();
         //Bottoni comandi mostra, aggiungi, elimina, modifica
         Button goToAdd = new Button("Add issue");
         Button delete = new Button("Delete issue");
@@ -40,11 +68,11 @@ public class Start extends Div {
         Grid<Issue> grid = new Grid<>(Issue.class);
         grid.setItems(issuesList);
         grid.setColumns("id", "titolo");
-        grid.setWidth("500px");
+        grid.setWidth("500px");*/
 /***********************************************************************************************************************/
 
 /***********************************************************************************************************************/
-        Issue issueMod = new Issue();
+       /* Issue issueMod = new Issue();
         Dialog modificaDialog = new Dialog();
         modificaDialog.setCloseOnOutsideClick(false);
 
@@ -85,11 +113,11 @@ public class Start extends Div {
         Dialog mostra = new Dialog();
         TextField idIssue = new TextField("Id");
 
-        mostra.add();
+        mostra.add();*/
 
 /***********************************************************************************************************************/
         //Mostra dati issue
-        grid.asSingleSelect().addValueChangeListener(event -> {
+      /*  grid.asSingleSelect().addValueChangeListener(event -> {
             String s = String.format("%s", event.getValue());
             if(s.equals("null")){
                 show.setEnabled(false);
@@ -101,11 +129,11 @@ public class Start extends Div {
 
         show.addClickListener(event ->{
             mostra.open();
-        });
+        });*/
 
 /***********************************************************************************************************************/
         //Comando modifica
-        grid.asSingleSelect().addValueChangeListener(event -> {
+        /*grid.asSingleSelect().addValueChangeListener(event -> {
             String s = String.format("%s", event.getValue());
             if(s.equals("null")){
                 logoModifica.setVisible(false);
@@ -156,12 +184,12 @@ public class Start extends Div {
         //Annulla modifiche
         annulla.addClickListener(event ->{
            modificaDialog.close();
-        });
+        });*/
 /***********************************************************************************************************************/
 
 /***********************************************************************************************************************/
         //Elimina issue selezionata
-        Dialog eliminaDialog = new Dialog();
+        /*Dialog eliminaDialog = new Dialog();
         Button confermaEliminazione = new Button("Conferma");
         Button annullaEliminazione = new Button("Annulla");
 
@@ -207,10 +235,10 @@ public class Start extends Div {
         //Annulla modifiche
         annullaEliminazione.addClickListener(event ->{
             eliminaDialog.close();
-        });
+        });*/
 
 /***********************************************************************************************************************/
-        Div margineSinistro = new Div();
+        /*Div margineSinistro = new Div();
         margineSinistro.setWidth("500px");
 
         goToAdd.addClickListener(buttonClickEvent -> UI.getCurrent().navigate("aggiungi"));
@@ -229,6 +257,5 @@ public class Start extends Div {
                         margineSinistro,
                         h
                 )
-            );
-    }
+            );*/
 }

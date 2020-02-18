@@ -1,5 +1,6 @@
-package com.examples.test;
+package com.examples.test.views;
 
+import com.examples.test.IssueService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("elimina")
 public class DeleteIssue extends Div {
 
-    @Autowired
+    /*@Autowired
     IssueService rest;
 
     public DeleteIssue() {
@@ -125,5 +126,5 @@ public class DeleteIssue extends Div {
                     return1Button
             )
         ));
-    }
+    }*/
 }
