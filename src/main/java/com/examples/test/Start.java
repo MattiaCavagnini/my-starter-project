@@ -5,6 +5,7 @@ import com.examples.test.model.Issue;
 import com.examples.test.views.AddIssues;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -24,29 +25,36 @@ import org.springframework.web.client.RestTemplate;
 
 @Route("menu")
 @Slf4j
-public class Start extends VerticalLayout {
+public class Start extends VerticalLayout {//MainView
+
     private IssueService service = new IssueService();
     private Grid<Issue> grid = new Grid<>(Issue.class);
-
     private TextField filterText = new TextField();
+    private IssuesComponent form = new IssuesComponent(this);
 
     public Start() {
         filterText.setPlaceholder("Filter by title...");
         filterText.setClearButtonVisible(true);
-
         filterText.setValueChangeMode(ValueChangeMode.EAGER);
         filterText.addValueChangeListener(e -> updateList());
 
-        grid.setColumns("id", "titolo", "desc", "reportedBy");
+        grid.setColumns("titolo", "desc", "reportedBy");
+
+        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
+        mainContent.setSizeFull();
+        grid.setSizeFull();
+
+        add(filterText, mainContent);
+        setSizeFull();
 
         updateList();
-
-        add(filterText, grid);
     }
 
     public void updateList() {
-        grid.setItems(service.getAllByTitle(filterText.getValue()));
+        grid.setItems(service.getAll(filterText.getValue()));
     }
+}
+
         /*
         HorizontalLayout h = new HorizontalLayout();
         /***********************************************************************************************/
@@ -256,4 +264,3 @@ public class Start extends VerticalLayout {
                         h
                 )
             );*/
-}

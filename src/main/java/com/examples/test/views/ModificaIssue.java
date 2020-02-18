@@ -60,7 +60,7 @@ public class ModificaIssue extends Div {
 
         Dialog d1 = new Dialog();
 
-        confirm.addClickListener(click -> {
+        /*confirm.addClickListener(click -> {
             if(insertId.getValue().length() >= 1 && !insertTitle.isEmpty() && !insertDesc.isEmpty() && !insertRepo.isEmpty()) {
                 ControlloPresenza p = new ControlloPresenza();
                 if (p.getById(Integer.parseInt(insertId.getValue()))) {
@@ -105,5 +105,5 @@ public class ModificaIssue extends Div {
                 )
             )
         );
-    }
-}
+    }*/
+}}

@@ -10,7 +10,7 @@ public class ControlloPresenza {
         issueService = new IssueService();
     }
 
-    public boolean getById(Integer id) {
+    /*public boolean getById(Integer id) {
         boolean risultato = false;
         Issue[] issueList = issueService.getAll();
 
@@ -20,9 +20,9 @@ public class ControlloPresenza {
             }
         }
         return risultato;
-    }
+    }*/
 
-    public Integer getIdByTitle(String title){
+    /*public Integer getIdByTitle(String title){
         Integer risultato = 0;
         Issue[] issueList = issueService.getAll();
 
@@ -45,5 +45,5 @@ public class ControlloPresenza {
             }
         }
         return risultato;
-    }
+    }*/
 }

@@ -18,12 +18,11 @@ public class IssueService {
         restTemplate = new RestTemplate();
     }
 
-    public Issue[] getAll(){
+    public Issue[] getAll(String title){
         ResponseEntity<Issue[]> response =
                 restTemplate.getForEntity(
                         "http://localhost:8080/issues/",
                         Issue[].class);
-
         return response.getBody();
     }
 
@@ -60,23 +59,13 @@ public class IssueService {
     }
 
     public Issue[] getAllByTitle(String title){
-        List<Issue> issue = new ArrayList<>();
+        Issue[] issue;
         ResponseEntity<Issue[]> response =
                 restTemplate.getForEntity(
                         "http://localhost:8080/issues?title=" + title,
                         Issue[].class);
-        issue = Arrays.asList(response.getBody());
-        if(title.equals(null)) {
-            return Issue;
-        }
-        else{
-            for(int i = 0; i<issue.size(); i++){
-                if(!issue.get(i).getTitolo().equals(title)){
-                    issue.remove(i);
-                }
-            }
+        issue = response.getBody();
             return issue;
-        }
     }
 
     public boolean postIssue(String titolo, String desc, String repo) {
