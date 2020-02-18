@@ -1,7 +1,6 @@
 package com.examples.test.controllo;
 
-import com.examples.test.IssueService;
-import com.examples.test.model.Issue;
+import com.examples.test.services.IssueService;
 
 public class ControlloPresenza {
     IssueService issueService;

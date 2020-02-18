@@ -1,7 +1,7 @@
 package com.examples.test.components;
 
-import com.examples.test.IssueService;
-import com.examples.test.Start;
+import com.examples.test.services.IssueService;
+import com.examples.test.views.MainView;
 import com.examples.test.model.Issue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -25,13 +25,18 @@ public class IssuesComponent extends FormLayout {//CustomerForm
 
     private Binder<Issue> binder = new Binder<>(Issue.class);
 
-    private Start mainView;
+    private MainView mainView;
 
-    public IssuesComponent(Start mainView) {
+    public IssuesComponent(MainView mainView) {
 
+        titolo.setWidth("400px");
+        desc.setWidth("400px");
+        reportedBy.setWidth("400px");
+
+        setVisible(false);
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(titolo, desc, reportedBy,buttons);
+        add(new VerticalLayout(titolo, desc, reportedBy,buttons));
 
         binder.bindInstanceFields(this);
 

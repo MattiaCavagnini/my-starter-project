@@ -1,40 +1,27 @@
-package com.examples.test;
+package com.examples.test.views;
 
+import com.examples.test.services.IssueService;
 import com.examples.test.components.IssuesComponent;
 import com.examples.test.model.Issue;
-import com.examples.test.views.AddIssues;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.client.RestTemplate;
 
 @Route("menu")
 @Slf4j
-public class Start extends VerticalLayout {//MainView
+public class MainView extends VerticalLayout {//MainView
 
     private IssueService service = new IssueService();
     private Grid<Issue> grid = new Grid<>(Issue.class);
     private TextField filterText = new TextField();
     private IssuesComponent form = new IssuesComponent(this);
 
-
-
-    public Start() {
+    public MainView() {
         filterText.setPlaceholder("Filter by title...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.EAGER);
@@ -46,8 +33,6 @@ public class Start extends VerticalLayout {//MainView
             form.setComponent(new Issue());
         });
 
-        form.setComponent(null);
-
         HorizontalLayout toolbar = new HorizontalLayout(filterText,
                 addCustomerBtn);
 
@@ -55,22 +40,21 @@ public class Start extends VerticalLayout {//MainView
 
         HorizontalLayout mainContent = new HorizontalLayout(grid, form);
         mainContent.setSizeFull();
-        grid.setSizeFull();
+        grid.setMaxWidth("700px");
 
         add(new HorizontalLayout(filterText, toolbar), mainContent);
         setSizeFull();
 
-        updateList();
-
         grid.asSingleSelect().addValueChangeListener(event ->
                 form.setComponent(grid.asSingleSelect().getValue()));
+
+        updateList();
     }
 
     public void updateList() {
         grid.setItems(service.getAll(filterText.getValue()));
     }
 }
-
         /*
         HorizontalLayout h = new HorizontalLayout();
         /***********************************************************************************************/

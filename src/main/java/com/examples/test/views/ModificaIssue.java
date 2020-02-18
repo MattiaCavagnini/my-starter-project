@@ -1,7 +1,6 @@
 package com.examples.test.views;
 
-import com.examples.test.IssueService;
-import com.examples.test.controllo.ControlloPresenza;
+import com.examples.test.services.IssueService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
@@ -9,8 +8,6 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 

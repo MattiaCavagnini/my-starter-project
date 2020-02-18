@@ -1,4 +1,4 @@
-package com.examples.test;
+package com.examples.test.services;
 
 import com.examples.test.model.Issue;
 import org.springframework.http.ResponseEntity;
@@ -103,5 +103,4 @@ public class IssueService {
         restTemplate.put( "http://localhost:8080/issues", newIssue);
         return true;
     }
-
 }
